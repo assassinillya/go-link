@@ -1,0 +1,10 @@
+server:
+  port: "8080"
+
+database:
+  mysql_dsn: "root:123456@tcp(127.0.0.1:3306)/go_link_db?charset=utf8mb4&parseTime=True&loc=Local"
+  redis_addr: "127.0.0.1:6379"
+  redis_pwd: ""
+
+jwt:
+  secret: "my_super_secret_key"
