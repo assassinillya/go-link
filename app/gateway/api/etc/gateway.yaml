@@ -1,0 +1,19 @@
+Name: gateway
+Host: 0.0.0.0
+Port: 8888
+
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+
+Auth:
+  AccessSecret: "12345678"
+  AccessExpire: 86400
+
+ShortenerRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: shortener.rpc
