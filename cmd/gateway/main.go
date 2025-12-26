@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"go-link/app/shortener"
+	"go-link/app/user"
 	"go-link/internal/gateway/middleware"
-	"go-link/internal/shortener"
-	"go-link/internal/user"
 	"go-link/pkg/config"
 	"go-link/pkg/db"
 	"log"

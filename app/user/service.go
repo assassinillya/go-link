@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-link/internal/user/model"
+	"go-link/app/user/model"
 	"go-link/pkg/db"
 	"go-link/pkg/utils"
 	"net/http"

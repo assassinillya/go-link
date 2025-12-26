@@ -1,0 +1,12 @@
+Name: shortener.rpc
+ListenOn: 0.0.0.0:8082
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: shortener.rpc
+Mysql:
+  DataSource: root:123456@tcp(127.0.0.1:3306)/go_link_db?charset=utf8mb4&parseTime=True&loc=Local
+BizRedis:
+  Host: localhost:6379
+  Type: node
+  Pass: ""

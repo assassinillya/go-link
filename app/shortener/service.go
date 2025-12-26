@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/redis/go-redis/v9"
-	"go-link/internal/shortener/model"
+	"go-link/app/shortener/model"
 	"go-link/pkg/db"
 	"go-link/pkg/utils"
 	"log"

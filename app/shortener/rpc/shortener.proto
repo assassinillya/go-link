@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package shortener;
+option go_package="./shortener";
+
+// 创建断连
+message CreateReq{
+  string url =1;
+  int64 user_id = 2;
+}
+message CreateResp {
+  string short_url = 1;
+}
+
+// 还原短链 (用于跳转)
+message GetOriginReq {
+  string short_code = 1;
+}
+message GetOriginResp {
+  string origin_url = 1;
+}
+
+service Shortener {
+  rpc Create(CreateReq) returns(CreateResp);
+  rpc GetOrigin(GetOriginReq) returns(GetOriginResp);
+}
+// goctl rpc protoc shortener.proto --go_out=. --go-grpc_out=. --zrpc_out=.

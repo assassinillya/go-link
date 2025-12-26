@@ -1,0 +1,57 @@
+syntax = "v1"
+
+type (
+	// 定义登录请求的 JSON 结构
+	LoginReq {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	// 定义登录返回的 JSON 结构
+	LoginResp {
+		Token string `json:"token"`
+		Msg   string `json:"msg"`
+	}
+	CreateLinkReq {
+		Url string `json:"url"`
+	}
+	CreateLinkResp {
+		ShortUrl string `json:"short_url"`
+	}
+	// 定义一个空的 Req，因为参数在路径里 (path variable)
+	// 但 go-zero 还是需要一个结构体来接收 path 参数
+	GetLinkReq {
+		Code string `path:"code"` // 注意这里 tag 是 path
+	}
+	GetLinkResp {
+		Url string `json:"url"`
+	}
+)
+
+// 定义服务
+// 这是公开的接口
+service gateway {
+	@handler Login // 告诉 goctl 生成一个叫 LoginLogic 的文件
+	post /user/login (LoginReq) returns (LoginResp)
+}
+
+// 需要鉴权的接口
+@server (
+	jwt:    Auth // 对应yaml的配置
+	prefix: /api/v1 // 前缀
+)
+service gateway {
+	@handler CreateLink
+	post /link/create (CreateLinkReq) returns (CreateLinkResp)
+}
+
+@server (
+	// 注意：这里不要加 jwt: Auth，因为跳转不需要登录
+	// 也不要加 prefix，因为短链通常是根路径，如 http://site/xyz
+	group: shortener // 生成到 internal/handler/shortener 目录下
+)
+service gateway {
+	@handler Redirect // 生成 RedirectHandler
+	get /:code (GetLinkReq) returns (GetLinkResp)
+}
+
+// goctl api go -api gateway.api -dir .

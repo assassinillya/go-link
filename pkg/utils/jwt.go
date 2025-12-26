@@ -6,7 +6,7 @@ import (
 )
 
 // JwtSecret 定义密钥（在生产环境中，可以从 config/env 中读取）
-var JwtSecret = []byte("123456")
+var JwtSecret = []byte("12345678")
 
 // Claims 自定义载荷，可以存一些非敏感信息，比如 UserID
 type Claims struct {
@@ -31,7 +31,7 @@ func GenerateToken(userID uint) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	// 生成签名字符串
 	tokenString, err := token.SignedString(JwtSecret)
-	return "Bearer " + tokenString, err
+	return tokenString, err
 }
 
 func ParseToken(tokenString string) (*Claims, error) {
